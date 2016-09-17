@@ -1,0 +1,23 @@
+{
+  "name": "yelp-messenger",
+  "version": "1.0.0",
+  "description": "Hack The North 2016 project, a messenger chatbot interfacing with yelp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanGB/hackthenorth-2016.git"
+  },
+  "author": "Jonathan Guillotte-Blouin & Ryan Fitzgerald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathanGB/hackthenorth-2016/issues"
+  },
+  "homepage": "https://github.com/jonathanGB/hackthenorth-2016#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "request": "^2.74.0"
+  }
+}
