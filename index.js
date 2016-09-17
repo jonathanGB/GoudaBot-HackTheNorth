@@ -5,19 +5,20 @@ const https = require('https');
 var app = express();
 
 app.get('/', function (req, res) {
-  res.send('Hello World! Wazza');
+  res.send('Hello World! Wazzaaaaaa');
 });
 
-app.listen(80, function () {
-  console.log('Example app listening on port 80!');
-});
+if (!process.env.CERT_PATH) {
+	console.log('cert path is not present')
+	process.exit()
+}
 
-/*var certOptions = {
-    ca: fs.readFileSync('../pebble-localize_win.ca-bundle'),
-    key: fs.readFileSync('../pebble-localize-ssl.pem'),
-    cert: fs.readFileSync('../pebble-localize_win.crt')
-};*/
+var certOptions = {
+  key: fs.readFileSync(`${process.env.CERT_PATH}privkey.pem`),
+  cert: fs.readFileSync(`${process.env.CERT_PATH}cert.pem`),
+  ca: fs.readFileSync(`${process.env.CERT_PATH}chain.pem`)
+};
 
-/*var server = https.createServer(certOptions, app).listen(port, () => {
+var server = https.createServer(certOptions, app).listen(443, () => {
     console.log("Server started");
-}); */
+});
