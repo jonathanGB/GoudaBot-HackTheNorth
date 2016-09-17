@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const goudaBot = require('./lib/gouda-bot');
 
 var app = express();
+var userStates = {};
 
 app.use(bodyParser());
 app.use(express.static('public'));
@@ -33,11 +34,10 @@ app.post('/webhook', (req, res) => {
     // There may be multiple if batched
     data.entry.forEach(function(pageEntry) {
       var timeOfEvent = pageEntry.time;
-
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
         if (messagingEvent.message) {
-          goudaBot.receivedMessage(messagingEvent);
+          goudaBot.receivedMessage(messagingEvent, userStates);
         }  else if (messagingEvent.postback) {
           goudaBot.receivedPostback(messagingEvent);
         } else {
