@@ -33,28 +33,24 @@ app.post('/webhook', (req, res) => {
     // There may be multiple if batched
     data.entry.forEach(function(pageEntry) {
       var timeOfEvent = pageEntry.time;
-      console.log(JSON.stringify(pageEntry));
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
         if (messagingEvent.message) {
-          goudaBot.receivedMessage(messagingEvent, sendStatus);
+          goudaBot.receivedMessage(messagingEvent);
         }  else if (messagingEvent.postback) {
-          goudaBot.receivedPostback(messagingEvent, sendStatus);
+          goudaBot.receivedPostback(messagingEvent);
         } else {
           console.log("Webhook received unknown messagingEvent: ", messagingEvent);
-          sendStatus();
         }
-      });*/
+      });
     });
 
     // Assume all went well.
     //
     // You must send back a 200, within 20 seconds, to let us know you've 
     // successfully received the callback. Otherwise, the request will time out.
-    function sendStatus() {
-      res.sendStatus(200);
-    }
+    res.sendStatus(200);
   }
 });
 
