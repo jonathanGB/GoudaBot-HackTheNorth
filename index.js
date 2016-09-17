@@ -6,9 +6,10 @@ const bodyParser = require('body-parser');
 var app = express();
 
 app.use(bodyParser());
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.send('Hello World! Wazzaaaaaa');
+  res.sendFile(`${__dirname}public/index.html`);
 });
 
 app.get('/webhook', (req, res) => {
@@ -22,7 +23,7 @@ app.get('/webhook', (req, res) => {
   }  
 });
 
-app.post('/webhook', (req, res) {
+/*app.post('/webhook', (req, res) => {
   var data = req.body;
 
   // Make sure this is a page subscription
@@ -55,7 +56,7 @@ app.post('/webhook', (req, res) {
     // successfully received the callback. Otherwise, the request will time out.
     res.sendStatus(200);
   }
-});
+});*/
 
 if (!process.env.CERT_PATH) {
 	console.log('cert path is not present')
