@@ -108,6 +108,7 @@
 }
 
 .feature {
+    text-align: center;
     padding: 30px 0;
     border-bottom: 1px solid #ececec;
 }
@@ -125,6 +126,23 @@
 }
 
 .feature img {
+    max-width: 300px;
     display: block;
     margin: auto;
+}
+
+#footer {
+    padding: 15px 0;
+    text-align: center;
+}
+
+#footer-power img {
+    max-width: 150px;
+    margin-top: -15px;
+}
+
+#footer-credit {
+    font-size: 0.9em;
+    line-height: 1.7;
+    color: #b7b7b7;
 }
