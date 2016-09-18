@@ -121,8 +121,8 @@
     position: relative;
 }
 
-.feature-text {
-
+.feature h3 {
+    margin-top: 200px;
 }
 
 .feature img {
@@ -145,4 +145,12 @@
     font-size: 0.9em;
     line-height: 1.7;
     color: #b7b7b7;
+}
+
+@media only screen and (max-width : 991px) {
+
+    .feature h3 {
+        margin-top: 15px;
+    }
+
 }
