@@ -1,17 +1,32 @@
 const express = require('express');
 const fs = require('fs');
+const http = require('http');
 const https = require('https');
 const bodyParser = require('body-parser');
 const goudaBot = require('./lib/gouda-bot');
+const path = require('path');
 
+const public = `${__dirname}/public`;
 var app = express();
 var userStates = {};
 
 app.use(bodyParser());
-app.use(express.static('public'));
+app.use(express.static(public));
 
 app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}public/index.html`);
+  res.sendFile(path.resolve(public, "index.html"));
+});
+
+app.get('/services', (req, res) => {
+  res.sendFile(path.resolve(public, "services.html"));
+});
+
+app.get('/policy', (req, res) => {
+  res.sendFile(path.resolve(public, "policy.html"));
+});
+
+app.get('/info', (req, res) => {
+  res.sendFile(path.resolve(public, "info.html"));
 });
 
 app.get('/webhook', (req, res) => {
@@ -65,6 +80,12 @@ var certOptions = {
   ca: fs.readFileSync(`${process.env.CERT_PATH}chain.pem`)
 };
 
-var server = https.createServer(certOptions, app).listen(443, () => {
+https.createServer(certOptions, app).listen(443, () => {
     console.log("Server started");
 });
+
+// Redirect from http port 80 to https
+http.createServer((req, res) => {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
